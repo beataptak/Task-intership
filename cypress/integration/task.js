@@ -9,7 +9,11 @@ describe('My test', () => {
               .should('have.attr', 'placeholder', '********')
               .type('pwd')
 
-              cy.get('.btn').click()
+            cy.get('.btn').click()
+
+            const logIn= cy.get('.text-success')
+            logIn.should('have.attr', 'id', 'loginstatus')
+            .contains('Welcome, myUsername!')
     })
     it ('Visits bad log in', () => {
         cy.visit('http://uitestingplayground.com/sampleapp')
@@ -22,6 +26,10 @@ describe('My test', () => {
               .type('badPassword')
 
               cy.get('.btn').click()
+
+            const badLogin= cy.get('.text-danger')
+            badLogin.should('have.attr', 'id', 'loginstatus')
+            .contains('Invalid username/password')
     })
     it ('Visits log out', () => {
         cy.visit('http://uitestingplayground.com/sampleapp')
@@ -35,6 +43,10 @@ describe('My test', () => {
 
               cy.get('.btn').click()
               cy.get('.btn').click()
+
+            const logOut= cy.get('.text-info')
+            logOut.should('have.attr', 'id', 'loginstatus')
+            .contains('User logged out.')
 
     })
 })
